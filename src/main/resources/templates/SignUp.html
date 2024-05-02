@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head xmlns:th="http://www.w3.org/1999/xhtml">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<form action="#" th:action="@{/signup/user}" th:object="${patient}" method="post" id="signup-form">
+    <input type="date" id="date-of-birth" th:field="*{dateOfBirth}" placeholder="Date of Birth" required>
+    <input type="text" id="nationality" th:field="*{nationality}" placeholder="Nationality" required>
+    <input type="text" id="phone-number" th:field="*{phoneNumber}" placeholder="Phone Number" required>
+    <input type="text" id="address" th:field="*{address}" placeholder="Address" required>
+    <input type="text" id="gender" th:field="*{gender}" placeholder="Gender" required>
+    <input type="number" id="age" th:field="*{age}" placeholder="Age" required>
+    <input type="email" id="email" th:field="*{email}" placeholder="Email" required>
+    <input type="password" id="password" th:field="*{password}" placeholder="Password" required>
+    <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+    <input type="submit" value="Sign Up">
+</form>
+<p id="error-message"></p>
+</body>
+</html>

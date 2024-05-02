@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Failed</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to left, #4c59af, #9eafd5);
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 150px auto;
+            padding: 20px;
+            background-color = #c5caf0;
+            border-radius: 5px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            margin-top: 0;
+            color: white;
+        }
+
+        form {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            background-color = #c5caf0;"
+        }
+
+        button {
+            padding: 10px;
+            background-color: #4c59af;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #23144b;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1 style="text-align: center">Login Failed</h1>
+    <p style="color : white">Authentication failed. If you're an admin, please ensure that you have entered the correct email and
+        password.</p>
+    <form action="/login" method="get">
+        <button style="font-size: 15px" type="submit">Login Again</button>
+    </form>
+</div>
+</body>
+</html>
