@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Self-Esteem Test</title>
+  <style>
+  *{
+            box-sizing: border-box;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-decoration: none;
+   }
+    body {
+      font-family: Arial, sans-serif;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h3 {
+      margin-bottom: 5px;
+    }
+    select {
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<form id="selfEsteemTestForm" action="/assessments/submitTest" method="post">
+  <div>
+    <!-- Hidden input field for assessmentName -->
+    <input type="hidden" name="assessmentName" value="Self-Esteem">
+    <div>
+      <h3>Do you believe you are inferior to others in some way?*</h3>
+      <select name="answer1">
+        <option value="0">No, not at all</option>
+        <option value="1">Yes, a little</option>
+        <option value="2">Yes, somewhat</option>
+        <option value="3">Yes, in many ways</option>
+        <option value="4">Yes, completely</option>
+      </select>
+    </div>
+    <div>
+      <h3>Do you believe you are a worthwhile person?*</h3>
+      <select name="answer2">
+        <option value="0">No, not at all</option>
+        <option value="1">Yes, but not much</option>
+        <option value="2">Yes, somewhat</option>
+        <option value="3">Yes, for the most part</option>
+        <option value="4">Yes, absolutely</option>
+      </select>
+    </div>
+    <div>
+      <h3>Are you sensitive to criticism?*</h3>
+      <select name="answer3">
+        <option value="0">No, not at all</option>
+        <option value="1">Yes, a little</option>
+        <option value="2">Yes, somewhat</option>
+        <option value="3">Yes, a lot</option>
+        <option value="4">Yes, completely</option>
+      </select>
+    </div>
+    <div>
+      <h3>Do you feel like an overall failure?*</h3>
+      <select name="answer4">
+        <option value="0">No, not at all</option>
+        <option value="1">Yes, a little</option>
+        <option value="2">Yes, somewhat</option>
+        <option value="3">Yes, a lot</option>
+        <option value="4">Yes, completely</option>
+      </select>
+    </div>
+    <div>
+      <h3>How often do you think positively about yourself?*</h3>
+      <select name="answer5">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>Do you like and accept yourself even when you are rejected by others?*</h3>
+      <select name="answer6">
+        <option value="0">No, never</option>
+        <option value="1">Yes, but not often</option>
+        <option value="2">Yes, sometimes</option>
+        <option value="3">Yes, often</option>
+        <option value="4">Yes, always</option>
+      </select>
+    </div>
+    <div>
+      <h3>Do you get nervous when called upon to speak to a group of people you don't know?*</h3>
+      <select name="answer7">
+        <option value="0">No, never</option>
+        <option value="1">Yes, but not often</option>
+        <option value="2">Yes, sometimes</option>
+        <option value="3">Yes, often</option>
+        <option value="4">Yes, always</option>
+      </select>
+    </div>
+    <div>
+      <h3>Are you satisfied with the person you've become?*</h3>
+      <select name="answer8">
+        <option value="0">No, not at all</option>
+        <option value="1">Yes, but only slightly</option>
+        <option value="2">Yes, sometimes</option>
+        <option value="3">Yes, for the most part</option>
+        <option value="4">Yes, completely</option>
+      </select>
+    </div>
+    <div>
+      <h3>Do you feel good about yourself without regular validation from others?*</h3>
+      <select name="answer9">
+        <option value="0">No, not at all</option>
+        <option value="1">Yes, but not often</option>
+        <option value="2">Yes, sometimes</option>
+        <option value="3">Yes, for the most part</option>
+        <option value="4">Yes, all the time</option>
+      </select>
+    </div>
+    <div>
+      <h3>How would you rate your level of self-esteem?*</h3>
+      <select name="answer10">
+        <option value="0">I'm very happy with who I am</option>
+        <option value="1">I'm mostly happy with who I am</option>
+        <option value="2">I have average self-esteem</option>
+        <option value="3">I have low self-esteem</option>
+        <option value="4">I have no self-esteem</option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+
+
+</body>
+</html>

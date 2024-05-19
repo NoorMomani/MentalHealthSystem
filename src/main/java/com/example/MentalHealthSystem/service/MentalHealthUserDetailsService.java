@@ -1,4 +1,4 @@
-package com.example.MentalHealthSystem.spring;
+package com.example.MentalHealthSystem.service;
 
 import com.example.MentalHealthSystem.Database.UserLoginDetails;
 import com.example.MentalHealthSystem.constants.UserRoles;
@@ -22,13 +22,12 @@ public class MentalHealthUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        log.error(username);
         Optional<UserLoginDetails> optionalUser = userLoginDetailsRepository.findByEmail(username);
         if (optionalUser.isPresent()){
             UserLoginDetails user = optionalUser.get();
             return User.builder().username(user.getEmail())
                     .password(user.getPassword())
-                    .roles(getRole(user.getRole()))
+                    .roles(user.getRole().name())
                     .build();
 
         } else{
@@ -37,7 +36,5 @@ public class MentalHealthUserDetailsService implements UserDetailsService {
         }
     }
 
-    private String getRole(UserRoles userRoles){
-        return Objects.requireNonNullElse(userRoles, UserRoles.GUST).name();
-    }
+
 }

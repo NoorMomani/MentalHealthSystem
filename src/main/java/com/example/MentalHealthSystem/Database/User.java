@@ -6,14 +6,17 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.sql.Blob;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
 @SuperBuilder
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class User {
+    public User(){}
     @Id
     String email;
 
@@ -21,7 +24,7 @@ public abstract class User {
     String name;
 
     @Column(name = "dateOfBirth")
-    Date dateOfBirth;
+    String dateOfBirth;
 
     @Column(name = "nationality")
     String nationality;
@@ -38,6 +41,15 @@ public abstract class User {
     @Column(name = "age")
     int age;
 
+    @Column(name = "country")
+    String country;
+
+    @Column(name = "city")
+    String city;
+
     @Column(name = "language")
-    List<Language> language;
+    Set<Language> language;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<Assessment> assessments;
 }

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Narcissistic Personality Test</title>
+    <style>
+    *{
+            box-sizing: border-box;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-decoration: none;
+    }
+    body {
+      font-family: Arial, sans-serif;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h3 {
+      margin-bottom: 5px;
+    }
+    select {
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<form id="burnoutTestForm" action="/assessments/submitTest" method="post">
+    <div>
+        <!-- Hidden input field for assessmentName -->
+        <input type="hidden" name="assessmentName" value="Narcissistic Personality">
+        <div>
+            <h3>1. Do you experience an exaggerated sense of self-importance that frequently involves the need to exaggerate your talents or accomplishments?</h3>
+            <select name="answer1">
+                <option value="0">Never</option>
+                <option value="1">Rarely</option>
+                <option value="2">Sometimes</option>
+                <option value="3">Often</option>
+                <option value="4">Very Often</option>
+            </select>
+        </div>
+        <div>
+            <h3>2. Do you believe you are special and unique and can only be understood by, or should associate with, other special or high-status people or institutions?</h3>
+            <select name="answer2">
+                <option value="0">Never</option>
+                <option value="1">Rarely</option>
+                <option value="2">Sometimes</option>
+                <option value="3">Often</option>
+                <option value="4">Very Often</option>
+            </select>
+        </div>
+        <div>
+            <h3>3. Do you find that you constantly have a willingness to take advantage of others to achieve your own goals?</h3>
+            <select name="answer3">
+                <option value="0">Never</option>
+                <option value="1">Rarely</option>
+                <option value="2">Sometimes</option>
+                <option value="3">Often</option>
+                <option value="4">Very Often</option>
+            </select>
+        </div>
+        <div>
+            <h3>4. Do you require excessive admiration from others?</h3>
+            <select name="answer4">
+                <option value="0">Never</option>
+                <option value="1">Rarely</option>
+                <option value="2">Sometimes</option>
+                <option value="3">Often</option>
+                <option value="4">Very Often</option>
+            </select>
+        </div>
+        <div>
+            <h3>5. Are you preoccupied with fantasies of unlimited success, power, brilliance, beauty, or ideal love?</h3>
+            <select name="answer5">
+                <option value="0">Never</option>
+                <option value="1">Rarely</option>
+                <option value="2">Sometimes</option>
+                <option value="3">Often</option>
+                <option value="4">Very Often</option>
+            </select>
+        </div>
+        <div>
+            <h3>6. Do you have a sense of entitlement from others that involve unreasonable expectations of especially favorable treatment or automatic compliance with their expectations?</h3>
+            <select name="answer6">
+                <option value="0">Never</option>
+                <option value="1">Rarely</option>
+                <option value="2">Sometimes</option>
+                <option value="3">Often</option>
+                <option value="4">Very Often</option>
+            </select>
+        </div>
+        <div>
+            <h3>7. Do you find you are unwilling to recognize or identify with the feelings and needs of others?</h3>
+            <select name="answer7">
+                <option value="0">Never</option>
+                <option value="1">Rarely</option>
+                <option value="2">Sometimes</option>
+                <option value="3">Often</option>
+                <option value="4">Very Often</option>
+            </select>
+        </div>
+        <div>
+            <h3>8. Do others perceive you as arrogant or snobby?</h3>
+            <select name="answer8">
+                <option value="0">Never</option>
+                <option value="1">Rarely</option>
+                <option value="2">Sometimes</option>
+                <option value="3">Often</option>
+                <option value="4">Very Often</option>
+            </select>
+        </div>
+        <div>
+            <h3>9. Do you find that you are often envious of others and/or believe that others are envious of you?</h3>
+            <select name="answer9">
+                <option value="0">Never</option>
+                <option value="1">Rarely</option>
+                <option value="2">Sometimes</option>
+                <option value="3">Often</option>
+                <option value="4">Very Often</option>
+            </select>
+        </div>
+    </div>
+    <div>
+        <button type="submit">Submit</button>
+    </div>
+</form>
+</body>
+</html>

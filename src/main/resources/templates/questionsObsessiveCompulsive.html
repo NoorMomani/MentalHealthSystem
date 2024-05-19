@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Obsessive Compulsive Test</title>
+  <style>
+  *{
+            box-sizing: border-box;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-decoration: none;
+   }
+    body {
+      font-family: Arial, sans-serif;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h3 {
+      margin-bottom: 5px;
+    }
+    select {
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<form id="ocdTestForm" action="/assessments/submitTest" method="post">
+  <div>
+    <!-- Hidden input field for assessmentName -->
+    <input type="hidden" name="assessmentName" value="Obsessive Compulsive">
+    <div>
+      <h3>1. Do you worry about germs, getting sick, or dying?</h3>
+      <select name="answer1">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>2. Do you have extreme fears about bad things happening or doing something wrong?</h3>
+      <select name="answer2">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>3. Do you feel that things have to be “just right”?</h3>
+      <select name="answer3">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>4. Do you have disturbing and unwanted thoughts or images about hurting others, but don’t want to hurt anyone?</h3>
+      <select name="answer4">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>5. Do you have disturbing and unwanted thoughts or images of a sexual nature?</h3>
+      <select name="answer5">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>6. Do you worry a lot about doing the wrong thing?</h3>
+      <select name="answer6">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>7. Are you bothered by thoughts that you find embarrassing or gross?</h3>
+      <select name="answer7">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>8. Do you engage in excessive checking (re-checking that the door is locked, that the oven is off)?</h3>
+      <select name="answer8">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>9. Do you engage in excessive washing and/or cleaning?</h3>
+      <select name="answer9">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>10. Do you repeat actions until they are “just right” or start things over again?</h3>
+      <select name="answer10">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>11. Do you order or arrange things or items?</h3>
+      <select name="answer11">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>12. Do you need excessive reassurance (e.g., always asking, “Are you sure I’m going to be okay?”)?</h3>
+      <select name="answer12">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>13. Do you spend more than 3 hours total a day struggling with obsessions or compulsions?</h3>
+      <select name="answer13">
+        <option value="0">Never</option>
+        <option value="1">Sometimes</option>
+        <option value="2">Always</option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+</body>
+</html>

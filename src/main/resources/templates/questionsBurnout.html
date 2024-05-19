@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Burnout Test</title>
+  <style>
+    *{
+            box-sizing: border-box;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-decoration: none;
+     }
+    body {
+      font-family: Arial, sans-serif;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h3 {
+      margin-bottom: 5px;
+    }
+    select {
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<form id="burnoutTestForm" action="/assessments/submitTest" method="post">
+  <div>
+    <!-- Hidden input field for assessmentName -->
+    <input type="hidden" name="assessmentName" value="Burnout">
+    <div>
+      <h3>1. I feel run down and drained of physical or emotional energy.</h3>
+      <select name="answer1">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+    <div>
+      <h3>2. I have negative thoughts about my job.</h3>
+      <select name="answer2">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+    <div>
+      <h3>3. I am harder and less sympathetic with people than perhaps they deserve.</h3>
+      <select name="answer3">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+    <div>
+      <h3>4. I am easily irritated by small problems, or by my co-workers and team.</h3>
+      <select name="answer4">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+    <div>
+      <h3>5. I feel misunderstood or unappreciated by my co-workers.</h3>
+      <select name="answer5">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+    <div>
+      <h3>6. I feel that I have no one to talk to.</h3>
+      <select name="answer6">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+    <div>
+      <h3>7. I feel that I am achieving less than I should.</h3>
+      <select name="answer7">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+    <div>
+      <h3>8. I feel under an unpleasant level of pressure to succeed.</h3>
+      <select name="answer8">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+    <div>
+      <h3>9. I feel that I am not getting what I want out of my job.</h3>
+      <select name="answer9">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+    <div>
+      <h3>10. I feel that I am in the wrong organization or the wrong profession.</h3>
+      <select name="answer10">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+    <div>
+      <h3>11. I am frustrated with parts of my job.</h3>
+      <select name="answer11">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+    <div>
+      <h3>12. I feel that organizational politics or bureaucracy frustrate my ability to do a good job.</h3>
+      <select name="answer12">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+    <div>
+      <h3>13. I feel that there is more work to do than I practically have the ability to do.</h3>
+      <select name="answer13">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+    <div>
+      <h3>14. I feel that I do not have time to do many of the things that are important to doing a good quality job.</h3>
+      <select name="answer14">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+    <div>
+      <h3>15. I find that I do not have time to plan as much as I would like to.</h3>
+      <select name="answer15">
+        <option value="0">Not at All</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Often</option>
+        <option value="4">Very Often</option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Depression Test</title>
+  <style>
+      *{
+            box-sizing: border-box;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-decoration: none;
+        }
+    body {
+      font-family: Arial, sans-serif;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h3 {
+      margin-bottom: 5px;
+    }
+    select {
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<form id="depressionTestForm" action="/assessments/submitTest" method="post">
+  <div>
+    <!-- Hidden input field for assessmentName -->
+    <input type="hidden" name="assessmentName" value="Depression">
+    <div>
+      <h3>Q1. Little interest or pleasure in doing things</h3>
+      <select name="answer1">
+        <option value="0">Never</option>
+        <option value="1">Some days</option>
+        <option value="2">More than half the days</option>
+        <option value="3">Almost every day</option>
+      </select>
+    </div>
+    <div>
+      <h3>Q2. Feeling down, depressed, or hopeless</h3>
+      <select name="answer2">
+        <option value="0">Never</option>
+        <option value="1">Some days</option>
+        <option value="2">More than half the days</option>
+        <option value="3">Almost every day</option>
+      </select>
+    </div>
+    <div>
+      <h3>Q3. Trouble falling or staying asleep, or sleeping too much</h3>
+      <select name="answer3">
+        <option value="0">Never</option>
+        <option value="1">Some days</option>
+        <option value="2">More than half the days</option>
+        <option value="3">Almost every day</option>
+      </select>
+    </div>
+    <div>
+      <h3>Q4. Feeling tired or having little energy</h3>
+      <select name="answer4">
+        <option value="0">Never</option>
+        <option value="1">Some days</option>
+        <option value="2">More than half the days</option>
+        <option value="3">Almost every day</option>
+      </select>
+    </div>
+    <div>
+      <h3>Q5. Poor appetite or overeating</h3>
+      <select name="answer5">
+        <option value="0">Never</option>
+        <option value="1">Some days</option>
+        <option value="2">More than half the days</option>
+        <option value="3">Almost every day</option>
+      </select>
+    </div>
+    <div>
+      <h3>Q6. Feeling bad about yourself - or that you are a failure or have let yourself or your family down</h3>
+      <select name="answer6">
+        <option value="0">Never</option>
+        <option value="1">Some days</option>
+        <option value="2">More than half the days</option>
+        <option value="3">Almost every day</option>
+      </select>
+    </div>
+    <div>
+      <h3>Q7. Trouble concentrating on things, such as reading the newspaper or watching television</h3>
+      <select name="answer7">
+        <option value="0">Never</option>
+        <option value="1">Some days</option>
+        <option value="2">More than half the days</option>
+        <option value="3">Almost every day</option>
+      </select>
+    </div>
+    <div>
+      <h3>Q8. Moving or speaking so slowly that other people could have noticed
+        Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual</h3>
+      <select name="answer8">
+        <option value="0">Never</option>
+        <option value="1">Some days</option>
+        <option value="2">More than half the days</option>
+        <option value="3">Almost every day</option>
+      </select>
+    </div>
+    <div>
+      <h3>Q9. Thoughts that you would be better off dead, or of hurting yourself</h3>
+      <select name="answer9">
+        <option value="0">Never</option>
+        <option value="1">Some days</option>
+        <option value="2">More than half the days</option>
+        <option value="3">Almost every day</option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+<script>
+
+</script>
+
+</body>
+</html>

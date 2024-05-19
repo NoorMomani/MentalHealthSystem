@@ -14,19 +14,6 @@ public class LoginController {
     }
 
 
-    @GetMapping(value = "/doctor/login")
-    public String doctorLogin() {
-        String actionPage = "doctor_login";
-        return "loginPage";
-    }
-
-    @GetMapping(value = "/admin/login")
-    public String adminLogin() {
-        String actionPage = "admin_login";
-        return "loginPage";
-    }
-
-
     @GetMapping("/login_failed")
     public String authenticationFailed(Model model) {
         return "login_failed";

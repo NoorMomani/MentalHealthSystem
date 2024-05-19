@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Social Shyness Test</title>
+  <style>
+  *{
+            box-sizing: border-box;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            text-decoration: none;
+  }
+    body {
+      font-family: Arial, sans-serif;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h3 {
+      margin-bottom: 5px;
+    }
+    select {
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<form id="socialAnxietyTestForm" action="/assessments/submitTest" method="post">
+  <div>
+    <!-- Hidden input field for assessmentName -->
+    <input type="hidden" name="assessmentName" value="Social Shyness">
+    <div>
+      <h3>1. I feel shy in a social situation.</h3>
+      <select name="answer1">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>2. I tend to blush or feel my face getting warm around unfamiliar people.</h3>
+      <select name="answer2">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>3. I find it difficult to initiate conversations with strangers.</h3>
+      <select name="answer3">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>4. I can’t open up in social events or gatherings.</h3>
+      <select name="answer4">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>5. I feel over-conscious when being the center of attention.</h3>
+      <select name="answer5">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>6. I prefer to stay quiet and observe others in a group setting.</h3>
+      <select name="answer6">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>7. I find it difficult to make eye contact with others.</h3>
+      <select name="answer7">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>8. I struggle to speak up and express my opinions, especially when I disagree with someone.</h3>
+      <select name="answer8">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>9. I have a tendency to overthink or analyze deeply if someone gives me any feedback.</h3>
+      <select name="answer9">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>10. I find it difficult to ask people for any information.</h3>
+      <select name="answer10">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>11. I feel uncomfortable with physical touch, such as greetings or hugging, when I meet people.</h3>
+      <select name="answer11">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>12. I find it difficult to talk about myself in front others.</h3>
+      <select name="answer12">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>13. I feel uncomfortable to talk to people of opposite sex.</h3>
+      <select name="answer13">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>14. I prefer to have a few close friends rather than a larger social circle.</h3>
+      <select name="answer14">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+    <div>
+      <h3>15. I struggle to involve in close and intimate relationships with another person.</h3>
+      <select name="answer15">
+        <option value="0">Never</option>
+        <option value="1">Rarely</option>
+        <option value="2">Sometimes</option>
+        <option value="3">Very Often</option>
+        <option value="4">Always</option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+
+
+</body>
+</html>

@@ -9,22 +9,23 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
 import java.io.IOException;
+import java.util.Locale;
 
 @Slf4j
 public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
-        log.error("hi There");
         boolean isDoctor = authentication.getAuthorities().stream()
-                .anyMatch(grantedAuthority ->{
-                    log.error(grantedAuthority.getAuthority() + " Hi Noor");
-                    return UserRoles.DOCTOR.name().equalsIgnoreCase(grantedAuthority.getAuthority());
-                } );
-        if(isDoctor)
-            setDefaultTargetUrl("/doctor/home");
+                .anyMatch(grantedAuthority -> UserRoles.DOCTOR.equals(UserRoles.getEnumByValue(grantedAuthority.getAuthority())));
+        boolean isAdmin = authentication.getAuthorities().stream()
+                .anyMatch(grantedAuthority -> UserRoles.ADMIN.equals(UserRoles.getEnumByValue(grantedAuthority.getAuthority())));
+        if (isAdmin){
+            setDefaultTargetUrl("/admins/dashboard");
+        } else if(isDoctor)
+            setDefaultTargetUrl("/doctors/dashboard");
         else
-            setDefaultTargetUrl("/patient/home");
+            setDefaultTargetUrl("/patients/dashboard");
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }

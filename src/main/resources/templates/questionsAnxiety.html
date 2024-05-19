@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Depression Test</title>
+  <style>
+
+    *{
+        box-sizing: border-box;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        text-decoration: none;
+    }
+    body {
+      font-family: Arial, sans-serif;
+    }
+    form {
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h3 {
+      margin-bottom: 5px;
+    }
+    select {
+      margin-bottom: 15px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+<form id="anxietyTestForm" action="/assessments/submitTest" method="post">
+  <div>
+    <!-- Hidden input field for assessmentName -->
+    <input type="hidden" name="assessmentName" value="Anxiety">
+    <div>
+      <h3>1. Feeling nervous, anxious, or on edge</h3>
+      <select name="answer1">
+        <option value="0">NOT AT ALL</option>
+        <option value="1">SEVERAL DAYS</option>
+        <option value="2">MORE THAN HALF THE DAYS</option>
+        <option value="3">NEARLY EVERY DAY</option>
+      </select>
+    </div>
+    <div>
+      <h3>2. Not being able to stop or control worrying</h3>
+      <select name="answer2">
+        <option value="0">NOT AT ALL</option>
+        <option value="1">SEVERAL DAYS</option>
+        <option value="2">MORE THAN HALF THE DAYS</option>
+        <option value="3">NEARLY EVERY DAY</option>
+      </select>
+    </div>
+    <div>
+      <h3>3. Worrying too much about different things</h3>
+      <select name="answer3">
+        <option value="0">NOT AT ALL</option>
+        <option value="1">SEVERAL DAYS</option>
+        <option value="2">MORE THAN HALF THE DAYS</option>
+        <option value="3">NEARLY EVERY DAY</option>
+      </select>
+    </div>
+    <div>
+      <h3>4. Trouble relaxing</h3>
+      <select name="answer4">
+        <option value="0">NOT AT ALL</option>
+        <option value="1">SEVERAL DAYS</option>
+        <option value="2">MORE THAN HALF THE DAYS</option>
+        <option value="3">NEARLY EVERY DAY</option>
+      </select>
+    </div>
+    <div>
+      <h3>5. Being so restless that it is hard to sit still</h3>
+      <select name="answer5">
+        <option value="0">NOT AT ALL</option>
+        <option value="1">SEVERAL DAYS</option>
+        <option value="2">MORE THAN HALF THE DAYS</option>
+        <option value="3">NEARLY EVERY DAY</option>
+      </select>
+    </div>
+    <div>
+      <h3>6. Becoming easily annoyed or irritable</h3>
+      <select name="answer6">
+        <option value="0">NOT AT ALL</option>
+        <option value="1">SEVERAL DAYS</option>
+        <option value="2">MORE THAN HALF THE DAYS</option>
+        <option value="3">NEARLY EVERY DAY</option>
+      </select>
+    </div>
+    <div>
+      <h3>7. Feeling afraid, as if something awful might happen</h3>
+      <select name="answer7">
+        <option value="0">NOT AT ALL</option>
+        <option value="1">SEVERAL DAYS</option>
+        <option value="2">MORE THAN HALF THE DAYS</option>
+        <option value="3">NEARLY EVERY DAY</option>
+      </select>
+    </div>
+  </div>
+  <div>
+    <button type="submit">Submit</button>
+  </div>
+</form>
+
+
+</body>
+</html>

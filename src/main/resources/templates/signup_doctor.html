@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Doctor</title>
+</head>
+<body>
+<h2>Sign Up - Doctor</h2>
+<form action="#" th:action="@{/signup/doctor_signup}" th:object="${doctorSignUpRequest}" method="post" id="signup-form">
+    <label for="email">Email:</label>
+    <input type="email" id="email" th:field="*{email}" placeholder="Email" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" th:field="*{password}" placeholder="Password" required><br>
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" th:field="*{name}" placeholder="Name"><br>
+
+    <label for="dateOfBirth">Date of Birth:</label>
+    <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" placeholder="Date of Birth"><br>
+
+    <label for="nationality">Nationality:</label>
+    <input type="text" id="nationality" th:field="*{nationality}" placeholder="Nationality" required><br>
+
+    <label for="phoneNumber">Phone Number:</label>
+    <input type="text" id="phoneNumber" th:field="*{phoneNumber}" placeholder="Phone Number"><br>
+
+    <label for="address">Address:</label>
+    <input type="text" id="address" th:field="*{address}" placeholder="Address"><br>
+
+    <label for="gender">Gender:</label>
+    <input type="text" id="gender" th:field="*{gender}" placeholder="Gender"><br>
+
+    <label for="age">Age:</label>
+    <input type="number" id="age" th:field="*{age}" placeholder="Age"><br>
+
+    <label for="country">Country:</label>
+    <input type="text" id="country" th:field="*{country}" placeholder="Country"><br>
+
+    <label for="city">City:</label>
+    <input type="text" id="city" th:field="*{city}" placeholder="City"><br>
+
+
+
+    <label for="yearsOfExperience">Years of Experience:</label>
+    <input type="number" id="yearsOfExperience" th:field="*{yearsOfExperience}" placeholder="Years of Experience"><br>
+
+    <label for="jobTitle">Job Title:</label>
+    <input type="text" id="jobTitle" th:field="*{jobTitle}" placeholder="Job Title"><br>
+
+
+
+    <label for="identityLicenseFile">Identity License File:</label>
+    <input type="file" id="identityLicenseFile" th:field="*{identityLicenseFileName}" accept=".pdf,.jpg,.jpeg,.png"><br>
+
+    <label for="sessionPrice">Session Price:</label>
+    <input type="number" id="sessionPrice" th:field="*{sessionPrice}" placeholder="Session Price"><br>
+
+    <label for="aboutTheDoctor">About the Doctor:</label><br>
+    <textarea id="aboutTheDoctor" th:field="*{aboutTheDoctor}" placeholder="About the Doctor"></textarea><br>
+
+
+
+    <input type="submit" value="Sign Up">
+</form>
+</body>
+</html>
