@@ -1,14 +1,10 @@
 package com.example.MentalHealthSystem.Database;
 
 import com.example.MentalHealthSystem.constants.Language;
-import com.example.MentalHealthSystem.constants.UserRoles;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 import lombok.experimental.SuperBuilder;
 
-import java.sql.Blob;
-import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Entity

@@ -1,21 +1,25 @@
 package com.example.MentalHealthSystem.service;
 
-import com.example.MentalHealthSystem.Database.*;
+import com.example.MentalHealthSystem.Database.Admin;
+import com.example.MentalHealthSystem.Database.Doctor;
+import com.example.MentalHealthSystem.Database.Patient;
+import com.example.MentalHealthSystem.Database.UserLoginDetails;
 import com.example.MentalHealthSystem.constants.DoctorStatus;
-import com.example.MentalHealthSystem.constants.Language;
 import com.example.MentalHealthSystem.constants.UserRoles;
-import com.example.MentalHealthSystem.repository.*;
+import com.example.MentalHealthSystem.repository.AdminRepository;
+import com.example.MentalHealthSystem.repository.DoctorRepository;
+import com.example.MentalHealthSystem.repository.PatientRepository;
+import com.example.MentalHealthSystem.repository.UserLoginDetailsRepository;
 import com.example.MentalHealthSystem.request.AdminSignUpRequest;
 import com.example.MentalHealthSystem.request.DoctorSignUpRequest;
 import com.example.MentalHealthSystem.request.PatientSignUpRequest;
 import com.example.MentalHealthSystem.request.SignUpRequest;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.HashSet;
 
 @Log4j2
 @Service
@@ -107,14 +111,21 @@ public class SignUpService {
                 .assessments(new HashSet<>())
                 .country(request.getCountry())
                 .aboutTheDoctor(request.getAboutTheDoctor())
-                .identityLicenseContentType(request.getIdentityLicenseContentType())
                 .jobTitle(request.getJobTitle())
                 .yearsOfExperience(request.getYearsOfExperience())
                 .sessionPrice(request.getSessionPrice())
                 .appointments(new HashSet<>())
+                .age(request.getAge())
+                .cvFileName(request.getCvFileName())
+                .cvContent(request.getCvContent())
+                .cvContentType(request.getCvContentType())
+                .identityLicenseFileName(request.getIdentityLicenseFileName())
+                .identityLicenseContent(request.getIdentityLicenseContent())
+                .identityLicenseContentType(request.getIdentityLicenseContentType())
                 .build();
         doctorRepository.save(doctor);
     }
+
 
     private void saveUserLoginDetails (SignUpRequest request){
         UserLoginDetails userLoginDetails = new UserLoginDetails();

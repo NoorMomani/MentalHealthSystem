@@ -1,128 +1,156 @@
 package com.example.MentalHealthSystem.constants;
 
+import lombok.Getter;
 import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 
-import java.util.*;
-
+import java.util.*;@Slf4j
 @UtilityClass
 public class AssessmentInfo {
     private static final Map<String, Integer> NUM_QUESTIONS = new HashMap<>();
+
 
     static {
         NUM_QUESTIONS.put("anxiety", 7);
         NUM_QUESTIONS.put("depression", 9);
         NUM_QUESTIONS.put("self-esteem", 10);
-        NUM_QUESTIONS.put("social shyness", 15);
-        NUM_QUESTIONS.put("obsessive compulsive", 13);
+        NUM_QUESTIONS.put("socialshyness", 15);
+        NUM_QUESTIONS.put("obsessivecompulsive", 13);
         NUM_QUESTIONS.put("burnout", 15);
-        NUM_QUESTIONS.put("narcissistic personality", 9);
+        NUM_QUESTIONS.put("narcissistic", 9);
+    }
+    @Getter
+    private static final List<String> ANSWERS = new ArrayList<>();
+    static {
+        ANSWERS.add("مُطْلَقاً");
+        ANSWERS.add("نادرًا");
+        ANSWERS.add("أحيانا");
+        ANSWERS.add("غالباً");
+        ANSWERS.add("دائما");
+    }
+
+    @Getter
+    private static final Map<String, String> ASSESSMENTSNAMES = new HashMap<>();
+    static {
+        ASSESSMENTSNAMES.put("Anxiety", "القلق");
+        ASSESSMENTSNAMES.put("Depression", "الاكتئاب");
+        ASSESSMENTSNAMES.put("Self-Esteem", "التقدير الذاتي");
+        ASSESSMENTSNAMES.put("SocialShyness", "الخجل الاجتماعي");
+        ASSESSMENTSNAMES.put("ObsessiveCompulsive", "الوسواس القهري");
+        ASSESSMENTSNAMES.put("Burnout", "الاحتراق الوظيفي");
+        ASSESSMENTSNAMES.put("Narcissistic", "الشخصية النرجسية");
+
+    }
+    public static String getAssessmentName(String key) {
+        log.error("befor getAssessmentName Key: " + key + ", Name: " + ASSESSMENTSNAMES.getOrDefault(key, key));
+        return ASSESSMENTSNAMES.getOrDefault(key, key);
     }
 
     private static final Set<String> ANXIETY_QUESTIONS = new HashSet<>();
     static {
-        ANXIETY_QUESTIONS.add("Feeling nervous, anxious, or on edge");
-        ANXIETY_QUESTIONS.add("Not being able to stop or control worrying");
-        ANXIETY_QUESTIONS.add("Worrying too much about different things");
-        ANXIETY_QUESTIONS.add("Trouble relaxing");
-        ANXIETY_QUESTIONS.add("Being so restless that it is hard to sit still");
-        ANXIETY_QUESTIONS.add("Becoming easily annoyed or irritable");
-        ANXIETY_QUESTIONS.add("Feeling afraid, as if something awful might happen");
+        ANXIETY_QUESTIONS.add("الشعور بالتوتر أو القلق أو التوتر");
+        ANXIETY_QUESTIONS.add("عدم القدرة على التوقف أو السيطرة على القلق");
+        ANXIETY_QUESTIONS.add("القلق الشديد بشأن أشياء مختلفة");
+        ANXIETY_QUESTIONS.add("صعوبة في الاسترخاء");
+        ANXIETY_QUESTIONS.add("الشعور بالقلق الشديد بحيث يصعب الجلوس ساكنًا");
+        ANXIETY_QUESTIONS.add("سهولة الانزعاج أو الانفعال");
+        ANXIETY_QUESTIONS.add("الشعور بالخوف، وكأن شيئاً فظيعاً قد يحدث");
 
     }
     private static final Set<String> BURNOUT_QUESTIONS = new HashSet<>();
     static {
-        BURNOUT_QUESTIONS.add("I feel run down and drained of physical or emotional energy.");
-        BURNOUT_QUESTIONS.add("I have negative thoughts about my job.");
-        BURNOUT_QUESTIONS.add("I am harder and less sympathetic with people than perhaps they deserve.");
-        BURNOUT_QUESTIONS.add("I am easily irritated by small problems, or by my co-workers and team.");
-        BURNOUT_QUESTIONS.add("I feel misunderstood or unappreciated by my co-workers.");
-        BURNOUT_QUESTIONS.add("I feel that I have no one to talk to.");
-        BURNOUT_QUESTIONS.add("I feel that I am achieving less than I should.");
-        BURNOUT_QUESTIONS.add("I feel under an unpleasant level of pressure to succeed.");
-        BURNOUT_QUESTIONS.add("I feel that I am not getting what I want out of my job.");
-        BURNOUT_QUESTIONS.add("I feel that I am in the wrong organization or the wrong profession.");
-        BURNOUT_QUESTIONS.add("I am frustrated with parts of my job.");
-        BURNOUT_QUESTIONS.add("I feel that organizational politics or bureaucracy frustrate my ability to do a good job.");
-        BURNOUT_QUESTIONS.add("I feel that there is more work to do than I practically have the ability to do.");
-        BURNOUT_QUESTIONS.add("I feel that I do not have time to do many of the things that are important to doing a good quality job.");
-        BURNOUT_QUESTIONS.add("I find that I do not have time to plan as much as I would like to.");
+        BURNOUT_QUESTIONS.add("أشعر بالإرهاق واستنزاف الطاقة الجسدية أو العاطفية.");
+        BURNOUT_QUESTIONS.add("لدي أفكار سلبية حول وظيفتي.");
+        BURNOUT_QUESTIONS.add("أنا أصعب وأقل تعاطفاً مع الناس مما يستحقونه.");
+        BURNOUT_QUESTIONS.add("أغضب بسهولة بسبب المشاكل الصغيرة، أو بسبب زملائي في العمل وفريق العمل.");
+        BURNOUT_QUESTIONS.add("أشعر بسوء الفهم أو عدم التقدير من قبل زملائي في العمل.");
+        BURNOUT_QUESTIONS.add("أشعر أنه ليس لدي من أتحدث معه.");
+        BURNOUT_QUESTIONS.add(" أشعر بأنني أحقق أقل مما ينبغي.");
+        BURNOUT_QUESTIONS.add("أشعر بأنني تحت مستوى غير مريح من الضغط لتحقيق النجاح.");
+        BURNOUT_QUESTIONS.add("أشعر أنني لا أحصل على ما أريد من وظيفتي");
+        BURNOUT_QUESTIONS.add("أشعر أنني في المنظمة الخطأ أو المهنة الخطأ.");
+        BURNOUT_QUESTIONS.add("أشعر بالإحباط بسبب أجزاء من وظيفتي.");
+        BURNOUT_QUESTIONS.add("أشعر أن السياسات التنظيمية أو البيروقراطية تحبط قدرتي على القيام بعمل جيد.");
+        BURNOUT_QUESTIONS.add("أشعر أن هناك المزيد من العمل الذي يتعين علي القيام به أكثر مما لدي القدرة على القيام به عمليًا.");
+        BURNOUT_QUESTIONS.add("أشعر أنه ليس لدي الوقت للقيام بالعديد من الأشياء المهمة للقيام بعمل جيد.");
+        BURNOUT_QUESTIONS.add("أجد أنه ليس لدي الوقت للتخطيط بقدر ما أريد.");
 
     }
     private static final Set<String> DEPRESSION_QUESTIONS = new HashSet<>();
     static {
-        DEPRESSION_QUESTIONS.add("Little interest or pleasure in doing things.");
-        DEPRESSION_QUESTIONS.add("Feeling down, depressed, or hopeless.");
-        DEPRESSION_QUESTIONS.add("Trouble falling or staying asleep, or sleeping too much.");
-        DEPRESSION_QUESTIONS.add("Feeling tired or having little energy.");
-        DEPRESSION_QUESTIONS.add("Poor appetite or overeating.");
-        DEPRESSION_QUESTIONS.add("Feeling bad about yourself - or that you are a failure or have let yourself or your family down.");
-        DEPRESSION_QUESTIONS.add("Trouble concentrating on things, such as reading the newspaper or watching television.");
-        DEPRESSION_QUESTIONS.add("Moving or speaking so slowly that other people could have noticed\n" +
-                "        Or the opposite - being so fidgety or restless that you have been moving around a lot more than usual.");
-        DEPRESSION_QUESTIONS.add("Thoughts that you would be better off dead, or of hurting yourself.");
+        DEPRESSION_QUESTIONS.add("قلة الاهتمام أو المتعة في القيام بالأشياء.");
+        DEPRESSION_QUESTIONS.add("الشعور بالإحباط أو الاكتئاب أو اليأس.");
+        DEPRESSION_QUESTIONS.add("صعوبة في النوم أو الاستمرار فيه، أو النوم أكثر من اللازم.");
+        DEPRESSION_QUESTIONS.add("الشعور بالتعب أو قلة الطاقة.");
+        DEPRESSION_QUESTIONS.add("ضعف الشهية أو الإفراط في تناول الطعام.");
+        DEPRESSION_QUESTIONS.add("الشعور بالسوء تجاه نفسك - أو أنك فاشل أو خذلت نفسك أو عائلتك.");
+        DEPRESSION_QUESTIONS.add("صعوبة في التركيز على الأشياء، مثل قراءة الجريدة أو مشاهدة التلفاز.");
+        DEPRESSION_QUESTIONS.add("التحرك أو التحدث ببطء شديد لدرجة أن الآخرين قد يلاحظون ذلك أو العكس – التململ أو القلق الشديد لدرجة أنك تتحرك أكثر من المعتاد.");
+        DEPRESSION_QUESTIONS.add("الأفكار التي من الأفضل أن تموت أو أن تؤذي نفسك.");
 
     }
     private static final Set<String> NARCISSISTIC_QUESTIONS = new HashSet<>();
     static {
-        NARCISSISTIC_QUESTIONS.add("Do you experience an exaggerated sense of self-importance that frequently involves the need to exaggerate your talents or accomplishments?");
-        NARCISSISTIC_QUESTIONS.add("Do you believe you are special and unique and can only be understood by, or should associate with, other special or high-status people or institutions?");
-        NARCISSISTIC_QUESTIONS.add("Do you find that you constantly have a willingness to take advantage of others to achieve your own goals?");
-        NARCISSISTIC_QUESTIONS.add("Do you require excessive admiration from others?");
-        NARCISSISTIC_QUESTIONS.add("Are you preoccupied with fantasies of unlimited success, power, brilliance, beauty, or ideal love?");
-        NARCISSISTIC_QUESTIONS.add(" Do you have a sense of entitlement from others that involve unreasonable expectations of especially favorable treatment or automatic compliance with their expectations?");
-        NARCISSISTIC_QUESTIONS.add("Do you find you are unwilling to recognize or identify with the feelings and needs of others?");
-        NARCISSISTIC_QUESTIONS.add("Do others perceive you as arrogant or snobby?");
-        NARCISSISTIC_QUESTIONS.add("Do you find that you are often envious of others and/or believe that others are envious of you?");
+        NARCISSISTIC_QUESTIONS.add("هل تشعر بإحساس مبالغ فيه بأهمية الذات والذي يتضمن في كثير من الأحيان الحاجة إلى المبالغة في مواهبك أو إنجازاتك");
+        NARCISSISTIC_QUESTIONS.add("هل تعتقد أنك مميز وفريد \u200B\u200Bمن نوعه ولا يمكن فهمه إلا من قبل أشخاص أو مؤسسات أخرى مميزة أو رفيعة المستوى أو ينبغي عليك الارتباط بها");
+        NARCISSISTIC_QUESTIONS.add(" هل تجد أن لديك رغبة دائمة في استغلال الآخرين لتحقيق أهدافك الخاصة");
+        NARCISSISTIC_QUESTIONS.add("هل تحتاج إلى الإعجاب الزائد من الآخرين");
+        NARCISSISTIC_QUESTIONS.add("هل أنت منشغل بأوهام النجاح اللامحدود، أو القوة، أو الذكاء، أو الجمال، أو الحب المثالي");
+        NARCISSISTIC_QUESTIONS.add("هل لديك شعور بالاستحقاق من الآخرين والذي يتضمن توقعات غير معقولة بمعاملة تفضيلية خاصة أو الامتثال التلقائي لتوقعاتهم");
+        NARCISSISTIC_QUESTIONS.add("هل تجد أنك غير راغب في التعرف على مشاعر واحتياجات الآخرين أو التعرف عليها");
+        NARCISSISTIC_QUESTIONS.add("هل ينظر إليك الآخرون على أنك متعجرف أو متعجرف");
+        NARCISSISTIC_QUESTIONS.add("هل تجد أنك غالبًا ما تحسد الآخرين و/أو تعتقد أن الآخرين يغارون منك");
+
 
     }
     private static final Set<String> OBSESSIVECOMPULSIVE_QUESTIONS = new HashSet<>();
     static {
-        OBSESSIVECOMPULSIVE_QUESTIONS.add("Do you worry about germs, getting sick, or dying?");
-        OBSESSIVECOMPULSIVE_QUESTIONS.add("Do you have extreme fears about bad things happening or doing something wrong?");
-        OBSESSIVECOMPULSIVE_QUESTIONS.add("Do you feel that things have to be “just right”?");
-        OBSESSIVECOMPULSIVE_QUESTIONS.add("Do you have disturbing and unwanted thoughts or images about hurting others, but don’t want to hurt anyone?");
-        OBSESSIVECOMPULSIVE_QUESTIONS.add("Do you have disturbing and unwanted thoughts or images of a sexual nature?");
-        OBSESSIVECOMPULSIVE_QUESTIONS.add("Do you worry a lot about doing the wrong thing?");
-        OBSESSIVECOMPULSIVE_QUESTIONS.add("Are you bothered by thoughts that you find embarrassing or gross?");
-        OBSESSIVECOMPULSIVE_QUESTIONS.add("Do you engage in excessive checking (re-checking that the door is locked, that the oven is off)?");
-        OBSESSIVECOMPULSIVE_QUESTIONS.add("Do you engage in excessive washing and/or cleaning?");
-        OBSESSIVECOMPULSIVE_QUESTIONS.add("Do you repeat actions until they are “just right” or start things over again?");
-        OBSESSIVECOMPULSIVE_QUESTIONS.add("Do you order or arrange things or items?");
-        OBSESSIVECOMPULSIVE_QUESTIONS.add("Do you need excessive reassurance (e.g., always asking, “Are you sure I’m going to be okay?”)?");
-        OBSESSIVECOMPULSIVE_QUESTIONS.add("Do you spend more than 3 hours total a day struggling with obsessions or compulsions?");
+        OBSESSIVECOMPULSIVE_QUESTIONS.add("هل تقلق بشأن الجراثيم أو المرض أو الموت");
+        OBSESSIVECOMPULSIVE_QUESTIONS.add("هل لديك مخاوف شديدة من حدوث أشياء سيئة أو القيام بشيء خاطئ");
+        OBSESSIVECOMPULSIVE_QUESTIONS.add("هل تشعر أن الأمور يجب أن تكون صحيحة تمامًا");
+        OBSESSIVECOMPULSIVE_QUESTIONS.add("هل تراودك أفكار أو صور مزعجة وغير مرغوب فيها حول إيذاء الآخرين، ولكنك لا تريد أن تؤذي أحدا");
+        OBSESSIVECOMPULSIVE_QUESTIONS.add("هل تراودك أفكار أو صور مزعجة وغير مرغوب فيها ذات طبيعة جنسية");
+        OBSESSIVECOMPULSIVE_QUESTIONS.add("هل تقلق كثيرًا بشأن فعل الشيء الخطأ");
+        OBSESSIVECOMPULSIVE_QUESTIONS.add("هل تنزعج من الأفكار التي تجدها محرجة أو مقززة");
+        OBSESSIVECOMPULSIVE_QUESTIONS.add("هل تقوم بالفحص المفرط (إعادة التحقق من أن الباب مغلق وأن الفرن مطفأ");
+        OBSESSIVECOMPULSIVE_QUESTIONS.add("هل تقوم بالغسيل و/أو التنظيف بشكل مفرط");
+        OBSESSIVECOMPULSIVE_QUESTIONS.add("هل تكرر الأفعال حتى تصبح \"صحيحة\" أم تبدأ الأمور من جديد");
+        OBSESSIVECOMPULSIVE_QUESTIONS.add("هل تقوم بطلب أو ترتيب الأشياء أو العناصر");
+        OBSESSIVECOMPULSIVE_QUESTIONS.add("هل تحتاج إلى طمأنينة مفرطة (على سبيل المثال، السؤال الدائم: \"هل أنت متأكد من أنني سأكون بخير");
+        OBSESSIVECOMPULSIVE_QUESTIONS.add("هل تقضي أكثر من 3 ساعات يومياً في محاربة الوساوس أو الأفعال القهرية");
 
     }
     private static final Set<String> SELF_ESTEEM_QUESTIONS = new HashSet<>();
     static {
-        SELF_ESTEEM_QUESTIONS.add("Do you believe you are inferior to others in some way?");
-        SELF_ESTEEM_QUESTIONS.add("Do you believe you are a worthwhile person?");
-        SELF_ESTEEM_QUESTIONS.add("Are you sensitive to criticism?");
-        SELF_ESTEEM_QUESTIONS.add("Do you feel like an overall failure?");
-        SELF_ESTEEM_QUESTIONS.add("How often do you think positively about yourself?");
-        SELF_ESTEEM_QUESTIONS.add("Do you like and accept yourself even when you are rejected by others?");
-        SELF_ESTEEM_QUESTIONS.add("Do you get nervous when called upon to speak to a group of people you don't know?");
-        SELF_ESTEEM_QUESTIONS.add("Are you satisfied with the person you've become?");
-        SELF_ESTEEM_QUESTIONS.add("Do you feel good about yourself without regular validation from others?");
-        SELF_ESTEEM_QUESTIONS.add("How would you rate your level of self-esteem?");
+        SELF_ESTEEM_QUESTIONS.add("هل تعتقد أنك أقل شأنا من الآخرين بطريقة ما");
+        SELF_ESTEEM_QUESTIONS.add("هل تعتقد أنك شخص جدير بالاهتمام");
+        SELF_ESTEEM_QUESTIONS.add("هل أنت حساس تجاه النقد");
+        SELF_ESTEEM_QUESTIONS.add("هل تشعر بالفشل الشامل");
+        SELF_ESTEEM_QUESTIONS.add("كم مرة تفكر بإيجابية في نفسك");
+        SELF_ESTEEM_QUESTIONS.add("هل تحب نفسك وتتقبلها حتى عندما يرفضك الآخرون");
+        SELF_ESTEEM_QUESTIONS.add("هل تشعر بالتوتر عندما يُطلب منك التحدث إلى مجموعة من الأشخاص لا تعرفهم");
+        SELF_ESTEEM_QUESTIONS.add("هل أنت راضٍ عن الشخص الذي أصبحت عليه");
+        SELF_ESTEEM_QUESTIONS.add("هل تشعر بالرضا عن نفسك دون التحقق المنتظم من الآخرين");
+        SELF_ESTEEM_QUESTIONS.add("كيف تقيم مستوى احترامك لذاتك");
     }
 
     private static final Set<String> SOCIALSHYNESS_QUESTIONS = new HashSet<>();
     static {
-        SOCIALSHYNESS_QUESTIONS.add("I feel shy in a social situation.");
-        SOCIALSHYNESS_QUESTIONS.add("I tend to blush or feel my face getting warm around unfamiliar people.");
-        SOCIALSHYNESS_QUESTIONS.add("I find it difficult to initiate conversations with strangers.");
-        SOCIALSHYNESS_QUESTIONS.add("I can’t open up in social events or gatherings.");
-        SOCIALSHYNESS_QUESTIONS.add("I feel over-conscious when being the center of attention.");
-        SOCIALSHYNESS_QUESTIONS.add("I prefer to stay quiet and observe others in a group setting.");
-        SOCIALSHYNESS_QUESTIONS.add("I find it difficult to make eye contact with others.");
-        SOCIALSHYNESS_QUESTIONS.add("I struggle to speak up and express my opinions, especially when I disagree with someone.");
-        SOCIALSHYNESS_QUESTIONS.add("I have a tendency to overthink or analyze deeply if someone gives me any feedback.");
-        SOCIALSHYNESS_QUESTIONS.add("I find it difficult to ask people for any information.");
-        SOCIALSHYNESS_QUESTIONS.add("I feel uncomfortable with physical touch, such as greetings or hugging, when I meet people.");
-        SOCIALSHYNESS_QUESTIONS.add("I find it difficult to talk about myself in front others.”)?");
-        SOCIALSHYNESS_QUESTIONS.add("I feel uncomfortable to talk to people of opposite sex.");
-        SOCIALSHYNESS_QUESTIONS.add("I prefer to have a few close friends rather than a larger social circle.");
-        SOCIALSHYNESS_QUESTIONS.add("I struggle to involve in close and intimate relationships with another person.");
+        SOCIALSHYNESS_QUESTIONS.add("أشعر بالخجل في المواقف الاجتماعية");
+        SOCIALSHYNESS_QUESTIONS.add("أميل إلى احمرار وجهي أو الشعور بالدفء عند وجود أشخاص غير مألوفين.");
+        SOCIALSHYNESS_QUESTIONS.add("أجد صعوبة في بدء محادثات مع الغرباء.");
+        SOCIALSHYNESS_QUESTIONS.add("لا أستطيع الانفتاح في المناسبات الاجتماعية أو التجمعات.");
+        SOCIALSHYNESS_QUESTIONS.add("أشعر بوعي مفرط عندما أكون مركز الاهتمام.");
+        SOCIALSHYNESS_QUESTIONS.add("أفضّل التزام الصمت ومراقبة الآخرين في إطار المجموعة.");
+        SOCIALSHYNESS_QUESTIONS.add("أجد صعوبة في التواصل البصري مع الآخرين.");
+        SOCIALSHYNESS_QUESTIONS.add("أجد صعوبة في التحدث والتعبير عن آرائي، خاصة عندما أختلف مع شخص ما.");
+        SOCIALSHYNESS_QUESTIONS.add("أميل إلى الإفراط في التفكير أو التحليل بعمق إذا قدم لي شخص ما أي تعليقات.");
+        SOCIALSHYNESS_QUESTIONS.add("أجد صعوبة في سؤال الناس عن أية معلومات.");
+        SOCIALSHYNESS_QUESTIONS.add("أشعر بعدم الراحة عند اللمس الجسدي، مثل التحية أو المعانقة، عندما أقابل الناس");
+        SOCIALSHYNESS_QUESTIONS.add("أجد صعوبة في التحدث عن نفسي أمام الآخرين");
+        SOCIALSHYNESS_QUESTIONS.add("أشعر بعدم الراحة عند التحدث مع الأشخاص من الجنس الآخر");
+        SOCIALSHYNESS_QUESTIONS.add("أفضل أن يكون لدي عدد قليل من الأصدقاء المقربين بدلاً من دائرة اجتماعية أكبر");
+        SOCIALSHYNESS_QUESTIONS.add("أجد صعوبة في الدخول في علاقات وثيقة وحميمة مع شخص آخر");
 
     }
     private static final Map<String, Set<String>> ASSESSMENT_QUESTIONS = new HashMap<>();
@@ -131,8 +159,8 @@ public class AssessmentInfo {
         ASSESSMENT_QUESTIONS.put("anxiety", ANXIETY_QUESTIONS);
         ASSESSMENT_QUESTIONS.put("burnout", BURNOUT_QUESTIONS);
         ASSESSMENT_QUESTIONS.put("self-esteem", SELF_ESTEEM_QUESTIONS);
-        ASSESSMENT_QUESTIONS.put("social shyness", SOCIALSHYNESS_QUESTIONS);
-        ASSESSMENT_QUESTIONS.put("obsessive compulsive", OBSESSIVECOMPULSIVE_QUESTIONS);
+        ASSESSMENT_QUESTIONS.put("socialshyness", SOCIALSHYNESS_QUESTIONS);
+        ASSESSMENT_QUESTIONS.put("obsessivecompulsive", OBSESSIVECOMPULSIVE_QUESTIONS);
         ASSESSMENT_QUESTIONS.put("depression", DEPRESSION_QUESTIONS);
         ASSESSMENT_QUESTIONS.put("narcissistic", NARCISSISTIC_QUESTIONS);
     }

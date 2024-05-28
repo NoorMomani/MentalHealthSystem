@@ -2,7 +2,9 @@ package com.example.MentalHealthSystem.controller;
 
 import com.example.MentalHealthSystem.Database.Admin;
 import com.example.MentalHealthSystem.Database.Doctor;
+import com.example.MentalHealthSystem.request.AdminSignUpRequest;
 import com.example.MentalHealthSystem.service.AdminService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,10 +12,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.List;
-
+import java.util.Optional;
+@Slf4j
 @Controller
 @RequestMapping("/admins")
 public class AdminController {
@@ -29,7 +31,7 @@ public class AdminController {
             model.addAttribute("admin", admin);
             return "admin_dashboard"; // Redirect to the patient dashboard page
         } else {
-            return "redirect:/login"; // Redirect to login if not logged in
+            return "/loginPage"; // Redirect to login if not logged in
         }
     }
 
@@ -62,10 +64,10 @@ public class AdminController {
     public String deleteDoctor(@RequestParam("email") String email, Model model) {
         Doctor doctor = adminService.getDoctorByEmail(email);
         if (doctor != null) {
-            // Send rejection email
-            adminService.sendRejectionEmail(doctor);
             // Delete the specialist
             adminService.deleteDoctor(email);
+            // Send rejection email
+            adminService.sendDeleteEmail(doctor);
             model.addAttribute("message", "Application rejected successfully.");
         } else {
             // Handle error, specialist not found
@@ -74,26 +76,68 @@ public class AdminController {
         // Redirect to the list of existing doctors
         return "doctors";
     }
+//    @PostMapping("/searchRequestedDoctors")
+//    public String searchSubmittedDoctorsByEmail(@RequestParam String email, Model model) {
+//        List<Doctor> requestedDoctors = adminService.getRequestedDoctors();
+//        model.addAttribute("requestedDoctors", requestedDoctors);
+//        return "doctors"; // Redirect back to the doctors.html page
+//    }
     @PostMapping("/searchRequestedDoctors")
     public String searchSubmittedDoctorsByEmail(@RequestParam String email, Model model) {
-        List<Doctor> requestedDoctors = adminService.getRequestedDoctors();
-        model.addAttribute("requestedDoctors", requestedDoctors);
+        log.error("searchSubmittedDoctorsByEmail before");
+        Optional<Doctor> doctorOptional = adminService.findPendingDoctorByEmail(email);
+        log.error("searchSubmittedDoctorsByEmail after");
+        model.addAttribute("systemDoctors", adminService.getSystemDoctors());
+        if (doctorOptional.isPresent()) {
+            model.addAttribute("requestedDoctors", List.of(doctorOptional.get()));
+        } else {
+            model.addAttribute("requestedDoctors", List.of());
+        }
         return "doctors"; // Redirect back to the doctors.html page
     }
     @GetMapping("/searchSystemDoctors")
     public String searchSystemDoctorsByEmail(@RequestParam String email, Model model) {
-        Doctor doctor = adminService.getDoctorByEmail(email);
-        model.addAttribute("systemDoctors", doctor);
+        Optional<Doctor> doctorOptional = adminService.findApprovedDoctorByEmail(email);
+        model.addAttribute("requestedDoctors", adminService.getRequestedDoctors());
+        if (doctorOptional.isPresent()) {
+            model.addAttribute("systemDoctors", List.of(doctorOptional.get()));
+        } else {
+            model.addAttribute("systemDoctors", List.of());
+        }
         return "doctors"; // Redirect back to the doctors.html page
     }
 
     @PostMapping("/changePassword")
-    public RedirectView changePassword(@RequestParam("email") String email,
+    public String changePassword(@RequestParam("email") String email,
                                        @RequestParam("newPassword") String newPassword,
-                                       RedirectAttributes redirectAttributes) {
+                                       RedirectAttributes redirectAttributes, Model model) {
         adminService.changePassword(email, newPassword);
         redirectAttributes.addFlashAttribute("message", "Password changed successfully.");
-        return new RedirectView("/doctorDetails?email=" + email);
+        Doctor doctor = adminService.getDoctorByEmail(email);
+        model.addAttribute("doctor", doctor);
+        return "DoctorDetails";
+    }
+    @GetMapping("/EditProfile")
+    public String EditProfile(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        Admin admin = adminService.getAdminById(userDetails.getUsername());
+        log.error("userDetails.getUsername() admin {}", userDetails.getUsername());
+        model.addAttribute("admin", admin);
+        return "EditAdminProfile"; // Redirect back to the doctors.html page
+    }
+
+
+    @PostMapping("/{email}/update")
+    public String updatePatientProfile(@PathVariable String email, @ModelAttribute AdminSignUpRequest adminSUR, Model model) {
+
+        try {
+            adminService.updateAdmin(email, adminSUR);
+            Admin admin = adminService.getAdminById(email);
+            model.addAttribute("admin", admin);
+            return "admin_dashboard";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "login";
+        }
     }
 
 }

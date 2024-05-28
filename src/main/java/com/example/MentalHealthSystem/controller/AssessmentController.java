@@ -1,4 +1,3 @@
-
 package com.example.MentalHealthSystem.controller;
 
 import com.example.MentalHealthSystem.service.AssessmentService;
@@ -45,20 +44,33 @@ public class AssessmentController {
             HttpServletRequest request,
             Model model
     ){
-
-        log.error(assessmentName);
+        log.error("userDetails Name: {}", userDetails.getUsername());
+        log.error("Assessment Name: {}", assessmentName);
         String userEmail = userDetails.getUsername();
         if (userEmail == null) {
-            return "redirect:/login";
+            return "/homepage";
         }
-
+        log.error("submitTest page");
         List<String> answers = assessmentService.answerOfQuestion(assessmentName, request);
         log.error("SuhibWithSubmit {}", answers.size());
         int numberOfQuestions = assessmentService.getNumberOfQuestions(assessmentName);
-
+        log.error("numberOfQuestions {}", numberOfQuestions);
 
         assessmentService.saveAssessmentAndAnswers(assessmentName, answers, userDetails, model);
         return "test_results";
     }
 
+    @GetMapping("/viewAssessment")
+    public String viewAssessment() {
+        return "assessments"; // Assuming the Thymeleaf template is named "patient_reports.html"
+    }
+
+    @PostMapping("/buildAssessment")
+    public String buildAssessment(@RequestParam("assessmentName") String assessmentName, Model model)
+    {
+        log.error(" enters buildAssessment {}",assessmentName );
+        assessmentService.buildAssessment(assessmentName, model);
+
+        return "assessment_questions";
+    }
 }

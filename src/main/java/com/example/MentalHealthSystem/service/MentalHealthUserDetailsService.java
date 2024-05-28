@@ -1,7 +1,6 @@
 package com.example.MentalHealthSystem.service;
 
 import com.example.MentalHealthSystem.Database.UserLoginDetails;
-import com.example.MentalHealthSystem.constants.UserRoles;
 import com.example.MentalHealthSystem.repository.UserLoginDetailsRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
 import java.util.Optional;
 
 @Slf4j
@@ -32,7 +30,7 @@ public class MentalHealthUserDetailsService implements UserDetailsService {
 
         } else{
             log.error("couldn't find username");
-            throw new UsernameNotFoundException(username);
+            throw new UsernameNotFoundException("couldn't find user for email: " + username);
         }
     }
 

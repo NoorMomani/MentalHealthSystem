@@ -1,14 +1,10 @@
 package com.example.MentalHealthSystem.request;
 
-import com.example.MentalHealthSystem.constants.Language;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.sql.Blob;
-import java.util.Date;
-import java.util.Set;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -33,5 +29,7 @@ public class PatientSignUpRequest extends SignUpRequest {
     private String country;
 
     private String city;
+
+    private MultipartFile profilePicture;
 
 }

@@ -15,11 +15,8 @@ public class Question {
     @Column(name = "content")
     String content;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "assessment_id")
     Assessment assessment;
 
-    @OneToOne
-    @JoinColumn(name = "answer_id")
-    Answer answer;
 }

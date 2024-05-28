@@ -19,5 +19,9 @@ public class Answer {
     @OneToOne
     @JoinColumn(name = "question_id")
     Question question;
+
+    @ManyToOne
+    @JoinColumn(name = "assessment_id")
+    Assessment assessment;
 }
 

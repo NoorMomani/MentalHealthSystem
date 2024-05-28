@@ -1,11 +1,9 @@
 package com.example.MentalHealthSystem.service;
 
-
 import com.example.MentalHealthSystem.Database.*;
 import com.example.MentalHealthSystem.constants.AssessmentInfo;
 import com.example.MentalHealthSystem.repository.*;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -15,7 +13,6 @@ import org.springframework.ui.Model;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.IntStream;
 
 @Slf4j
 @Service
@@ -25,8 +22,7 @@ public class AssessmentService {
     private final AssessmentRepository assessmentRepository;
     private final AnswerRepository answerRepository;
     private final QuestionRepository questionRepository;
-    @Autowired
-    PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
     @Autowired
     public AssessmentService(AssessmentRepository assessmentRepository, AnswerRepository answerRepository, QuestionRepository questionRepository, PatientRepository patientRepository) {
         this.assessmentRepository = assessmentRepository;
@@ -37,6 +33,7 @@ public class AssessmentService {
 
     public List<String> answerOfQuestion(String assessmentName, HttpServletRequest request) {
         List<String> answers = new ArrayList<>();
+        log.error("answerOfQuestion {}", getNumberOfQuestions(assessmentName));
         int numberOfQuestions = getNumberOfQuestions(assessmentName);
         for (int i = 1; i <= numberOfQuestions; i++) {
             String answer = request.getParameter("answer" + i);
@@ -47,6 +44,7 @@ public class AssessmentService {
         return answers;
     }
     public int getNumberOfQuestions(String assessmentName) {
+        log.error("getNumberOfQuestions service {}", AssessmentInfo.getNumberOfQuestions(assessmentName));
         return AssessmentInfo.getNumberOfQuestions(assessmentName);
     }
     public int calculateScore(List<String> answers) {
@@ -58,22 +56,27 @@ public class AssessmentService {
     }
 
     public String getCategory(int totalScore, String symptomName, int numberOfQuestions) {
-        int maxScore = numberOfQuestions * 3;
+        log.error("numberOfQuestions * AssessmentInfo.getANSWERS().size()");
+        int maxScore = numberOfQuestions * AssessmentInfo.getANSWERS().size();
         double proportion = (double) totalScore / maxScore;
+        log.error("translatedSymptomName bafore {}");
+        String translatedSymptomName = AssessmentInfo.getAssessmentName(symptomName);
+        log.error("translatedSymptomName get {}",translatedSymptomName);
         if (proportion >= 0.0 && proportion < 0.25) {
-            return "Minimal " + symptomName + " symptoms";
+            return "أعراض " + translatedSymptomName + " ضئيلة";
         } else if (proportion >= 0.25 && proportion < 0.5) {
-            return "Mild " + symptomName + " symptoms";
+            return "أعراض " + translatedSymptomName + " خفيفة";
         } else if (proportion >= 0.5 && proportion < 0.75) {
-            return "Moderate " + symptomName + " symptoms";
+            return "أعراض " + translatedSymptomName + " متوسطة";
         } else if (proportion >= 0.75 && proportion < 1.0) {
-            return "Moderately severe " + symptomName + " symptoms";
+            return "أعراض " + translatedSymptomName + " متوسطة إلى شديدة";
         } else if (proportion >= 1.0) {
-            return "Severe " + symptomName + " symptoms";
+            return "أعراض " + translatedSymptomName + " شديدة";
         } else {
             throw new IllegalArgumentException("Invalid total score: " + totalScore);
         }
     }
+
 
 
     public void saveAssessmentAndAnswers(String assessmentName, List<String> answers,
@@ -81,7 +84,7 @@ public class AssessmentService {
         Optional<Patient> optionalPatient = patientRepository.findById(userDetails.getUsername());
         if (optionalPatient.isPresent()) {
             int totalScore = calculateScore(answers);
-
+            log.error("before getCategory");
             String category = getCategory(totalScore, assessmentName,
                     AssessmentInfo.getNumberOfQuestions(assessmentName));
 
@@ -98,17 +101,16 @@ public class AssessmentService {
             assessment.setScore(totalScore);
             assessmentRepository.save(assessment);
 
-            Set<Question> assessmentQuestions = getQuestions(assessmentName, answers, patient, assessment);
+            getQuestions(assessmentName, answers, patient, assessment);
 
-            questionRepository.saveAll(assessmentQuestions);
+//            questionRepository.saveAll(assessmentQuestions);
         } else {
             // Handle case where patient is not found
             throw new IllegalArgumentException("User not found with username: " + userDetails.getUsername());
         }
     }
 
-    public Set<Question> getQuestions(String assessmentName, List<String> answers, Patient patient, Assessment assessment) {
-        Set<Question> assessmentQuestions = new HashSet<>();
+    private void getQuestions(String assessmentName, List<String> answers, Patient patient, Assessment assessment) {
         Set<String> questionsContent = AssessmentInfo.getAssessmentQuestions(assessmentName);
 
         AtomicInteger index = new AtomicInteger(0);
@@ -117,21 +119,23 @@ public class AssessmentService {
             Question objQuestion = new Question();
             Answer answer = new Answer();
             objQuestion.setContent(question);
-            objQuestion.setAnswer(answer);
-
+            objQuestion.setAssessment(assessment);
+            questionRepository.save(objQuestion);
+            answer.setAssessment(assessment);
             answer.setContent(answers.get(index.getAndIncrement()));
             answer.setQuestion(objQuestion);
-
-
             answer.setQuestion(objQuestion);
             answerRepository.save(answer);
-            assessmentQuestions.add(objQuestion);
         });
-        return assessmentQuestions;
     }
 
 
-
+    public void buildAssessment(String assessmentName, Model model)
+    {
+        model.addAttribute("assessmentQuestions",AssessmentInfo.getAssessmentQuestions(assessmentName) );
+        model.addAttribute( "assessmentAnswers", AssessmentInfo.getANSWERS());
+        model.addAttribute("assessmentName", assessmentName);
+    }
 
 
 }

@@ -4,6 +4,7 @@ package com.example.MentalHealthSystem.spring;
 import com.example.MentalHealthSystem.Handlers.AuthenticationSuccessHandler;
 import com.example.MentalHealthSystem.constants.UserRoles;
 import com.example.MentalHealthSystem.service.MentalHealthUserDetailsService;
+import com.example.MentalHealthSystem.service.ValidatorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,12 +27,17 @@ public class SecurityConfig {
     @Autowired
     MentalHealthUserDetailsService mentalHealthUserDetailsService;
 
+    @Autowired
+    ValidatorService validatorService;
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(registry -> {
-
+                    registry.requestMatchers("/css/**", "/images/**").permitAll();
+                    registry.requestMatchers("/check/**").permitAll();
+                    registry.requestMatchers("/clinic/**").permitAll();
                     registry.requestMatchers("/login").permitAll();
                     registry.requestMatchers("/home/**").permitAll();
                     registry.requestMatchers("/signup/**").permitAll();
@@ -42,10 +48,11 @@ public class SecurityConfig {
                     registry.requestMatchers("/patients/**").hasRole(UserRoles.PATIENT.name());
                     registry.anyRequest().authenticated();
 
+
                 }).formLogin(httpSecurityFormLoginConfigurer -> {
                     httpSecurityFormLoginConfigurer
                             .loginPage("/login")
-                            .successHandler(new AuthenticationSuccessHandler())
+                            .successHandler(new AuthenticationSuccessHandler(validatorService))
                             .permitAll();
                 }).sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
