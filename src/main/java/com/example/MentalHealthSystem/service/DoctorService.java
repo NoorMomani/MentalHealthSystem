@@ -140,9 +140,9 @@ public class DoctorService {
 
     public void deleteAppointment(String doctorId, Long appointmentId) {
         Appointment appointment = appointmentRepository.findById(appointmentId).orElse(null);
-        if (appointment != null && appointment.getDoctor().getEmail().equals(doctorId)) {
+        if (appointment != null && doctorId.equals(appointment.getDoctor().getEmail())) {
             if (appointment.isBooked()) {
-                Patient patient = appointment.getPatient();
+                 Patient patient = appointment.getPatient();
                 if (patient != null && patient.getEmail() != null) {
                     SimpleMailMessage message = new SimpleMailMessage();
                     message.setTo(patient.getEmail());
@@ -183,7 +183,7 @@ public class DoctorService {
         doctorRepository.save(doctor);
     }
     public List<Appointment> getAppointmentsByDoctorId(String doctorId, boolean booked) {
-        return appointmentRepository.findByDoctor_EmailAndBooked(doctorId, booked);
+        return appointmentRepository.findByDoctorEmailAndBooked(doctorId, booked);
     }
     private Appointment mapRowToAppointment(ResultSet rs, int rowNum) throws SQLException {
         Appointment appointment = new Appointment();
@@ -194,6 +194,6 @@ public class DoctorService {
     }
 
     public List<Appointment> getAppointmentsByDoctorId(String doctorId) {
-        return appointmentRepository.findByDoctor_Email(doctorId);
+        return appointmentRepository.findByDoctorEmail(doctorId);
     }
 }

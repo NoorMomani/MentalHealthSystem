@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
-    List<Appointment> findByDoctor_Email(String doctorId);
-    List<Appointment> findByDoctor_EmailAndBooked(String doctorId, boolean booked);
-    List<Appointment> findByPatient_Email(String patientId); // Add this method
+    List<Appointment> findByDoctorEmail(String doctorId);
+    List<Appointment> findByDoctorEmailAndBooked(String doctorId, boolean booked);
+    List<Appointment> findByPatientEmail(String patientId); // Add this method
 }

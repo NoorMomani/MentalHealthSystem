@@ -29,7 +29,7 @@ class QuestionServiceTest {
     void getQuestionsByAssessmentIdWhenIdInDBThenReturnQuestionList() {
         Question question = new Question();
         List<Question> questionList = List.of(question) ;
-        doReturn(Optional.of(questionList)).when(questionRepository).findByAssessmentId(3L);
+        doReturn(questionList).when(questionRepository).findByAssessmentId(3L);
         assertEquals(questionList, questionService.getQuestionsByAssessmentId(3L));
     }
     @Test

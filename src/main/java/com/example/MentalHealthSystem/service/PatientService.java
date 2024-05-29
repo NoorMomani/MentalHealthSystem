@@ -87,11 +87,11 @@ public class PatientService {
         return false;
     }
     public List<Appointment> getAppointmentsByPatientEmail(String email) {
-        return appointmentRepository.findByPatient_Email(email);
+        return appointmentRepository.findByPatientEmail(email);
     }
 
     public List<Appointment> getAppointmentsByDoctorEmailAndBookedIsTrue(String doctorEmail) {
-        return appointmentRepository.findByDoctor_EmailAndBooked(doctorEmail, true);
+        return appointmentRepository.findByDoctorEmailAndBooked(doctorEmail, true);
     }
 
     @Scheduled(fixedRate = 3600000) // Runs every hour
@@ -175,7 +175,7 @@ public class PatientService {
         }
     }
     public List<Report> getReportsForPatient(String patientId) {
-        List<Appointment> appointments = appointmentRepository.findByPatient_Email(patientId);
+        List<Appointment> appointments = appointmentRepository.findByPatientEmail(patientId);
         return reportRepository.findByAppointmentIn(appointments);
     }
 }

@@ -99,7 +99,7 @@ public class AdminService {
         }
     }
 
-    public void sendAcceptanceEmail(Doctor doctor) {
+    private void sendAcceptanceEmail(Doctor doctor) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(doctor.getEmail());
         message.setSubject("Your application has been accepted");
@@ -133,7 +133,7 @@ public class AdminService {
             throw new RuntimeException("Doctor email does not exist");
         }
     }
-    public void sendRejectEmail(Doctor doctor) {
+    private void sendRejectEmail(Doctor doctor) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(doctor.getEmail());
         message.setSubject("Your application has been rejected");
