@@ -13,7 +13,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -72,14 +75,39 @@ class PatientServiceTest {
     }
 
     @Test
-    void bookAppointment() {
+    void bookAppointmentWhenAppointmentIsBooked() {
+        Appointment appointment = new Appointment();
+        appointment.setId(1L);
+        appointment.setBooked(false);
+
+        Patient patient = new Patient();
+        patient.setEmail("patient@example.com");
+
+        when(appointmentRepository.findById(1L)).thenReturn(Optional.of(appointment));
+
+        boolean result = patientService.bookAppointment(1L, patient);
+        assertTrue(result);
+    }
+    @Test
+    void bookAppointmentWhenAppointmentIsNotBooked() {
+        Appointment appointment = new Appointment();
+        appointment.setId(1L);
+        appointment.setBooked(false);
+
+        Patient patient = new Patient();
+        patient.setEmail("patient@example.com");
+
+        when(appointmentRepository.findById(1L)).thenReturn(Optional.empty());
+
+        boolean result = patientService.bookAppointment(1L, patient);
+        assertFalse(result);
     }
 
     @Test
     void getAppointmentsByPatientEmail() {
         Appointment appointment = new Appointment();
         List<Appointment> appointmentList = List.of(appointment) ;
-        doReturn(appointmentList).when(appointmentRepository).findByDoctorEmail("test");
+        doReturn(appointmentList).when(appointmentRepository).findByPatientEmail("test");
         assertEquals(appointmentList, patientService.getAppointmentsByPatientEmail("test"));
     }
 
@@ -87,20 +115,68 @@ class PatientServiceTest {
     void getAppointmentsByDoctorEmailAndBookedIsTrue() {
         Appointment appointment = new Appointment();
         List<Appointment> appointmentList = List.of(appointment) ;
-        doReturn(appointmentList).when(appointmentRepository).findByDoctorEmailAndBooked("test",true);
+        doReturn(appointmentList).when(appointmentRepository).findByDoctorIdAndBooked("test",true);
         assertEquals(appointmentList, patientService.getAppointmentsByDoctorEmailAndBookedIsTrue("test"));
     }
 
     @Test
     void deleteExpiredAppointments() {
+        Appointment expiredAppointment1 = new Appointment();
+        expiredAppointment1.setSession(LocalDateTime.now().minusHours(2)); // Appointment session 2 hours ago
+
+        List<Appointment> allAppointments = new ArrayList<>();
+        allAppointments.add(expiredAppointment1);
+        when(appointmentRepository.findAll()).thenReturn(allAppointments);
+
+        patientService.deleteExpiredAppointments();
+        verify(appointmentRepository, times(1)).deleteAll(anyList());
+
+
     }
 
     @Test
     void cancelAppointment() {
+        Doctor doctor = new Doctor();
+        doctor.setEmail("doctor@example.com");
+        doctor.setName("Dr. Smith");
+
+        Patient patient = new Patient();
+        patient.setEmail("patient@example.com");
+        patient.setName("John Doe");
+        Appointment appointment = new Appointment();
+        appointment.setId(1L);
+        appointment.setBooked(true);
+        appointment.setPatient(patient);
+        appointment.setDoctor(doctor);
+
+        when(appointmentRepository.findById(1L)).thenReturn(Optional.of(appointment));
+
+        patientService.cancelAppointment(1L, patient);
+        verify(appointmentRepository, times(1)).save(any(Appointment.class));
     }
 
     @Test
     void addReport() {
+        Patient patient = new Patient();
+        patient.setEmail("patient@example.com");
+        patient.setName("John Doe");
+
+        Doctor doctor = new Doctor();
+        doctor.setName("Dr. Smith");
+
+        Appointment appointment = new Appointment();
+        appointment.setId(1L);
+        appointment.setBooked(true);
+        appointment.setPatient(patient);
+        appointment.setDoctor(doctor);
+        String reportContent = "This is a report content.";
+
+        when(appointmentRepository.findById(1L)).thenReturn(Optional.of(appointment));
+
+        patientService.addReport(1L, reportContent);
+
+        verify(reportRepository, times(1)).save(any(Report.class));
+
     }
 
     @Test

@@ -91,7 +91,7 @@ public class PatientService {
     }
 
     public List<Appointment> getAppointmentsByDoctorEmailAndBookedIsTrue(String doctorEmail) {
-        return appointmentRepository.findByDoctorEmailAndBooked(doctorEmail, true);
+        return appointmentRepository.findByDoctorIdAndBooked(doctorEmail, true);
     }
 
     @Scheduled(fixedRate = 3600000) // Runs every hour

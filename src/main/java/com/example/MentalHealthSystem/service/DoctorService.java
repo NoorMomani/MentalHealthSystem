@@ -44,15 +44,10 @@ public class DoctorService {
     public void updateDoctorProfile(String email, DoctorSignUpRequest doctorSUR) throws IOException {
         Doctor doctor = doctorRepository.findById(email).orElse(null);
         if (doctor != null) {
-            log.error("befor updateDoctorProfileFields");
             updateDoctorProfileFields(doctor, doctorSUR);
-            log.error("after updateDoctorProfileFields");
             handleFileUploads(doctor, doctorSUR);
-            log.error("after handleFileUploads");
             updateDoctorLocation(doctor, doctorSUR.getLocation());
-            log.error("after updateDoctorLocation");
             doctorRepository.save(doctor);
-            log.error("after doctorRepository.save(doctor);");
         } else {
             throw new RuntimeException("Doctor not found with email: " + email);
         }
@@ -183,7 +178,7 @@ public class DoctorService {
         doctorRepository.save(doctor);
     }
     public List<Appointment> getAppointmentsByDoctorId(String doctorId, boolean booked) {
-        return appointmentRepository.findByDoctorEmailAndBooked(doctorId, booked);
+        return appointmentRepository.findByDoctorIdAndBooked(doctorId, booked);
     }
     private Appointment mapRowToAppointment(ResultSet rs, int rowNum) throws SQLException {
         Appointment appointment = new Appointment();

@@ -14,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
@@ -49,7 +50,26 @@ class AdminServiceTest {
 
     @Test
     void updatePassword() {
+        String email = "test";
+        String newPassword = "newPassword123";
+        String encodedPassword = "encodedPassword123";
+        UserLoginDetails userLoginDetails = new UserLoginDetails();
+        userLoginDetails.setEmail(email);
+        userLoginDetails.setPassword("oldPassword");
 
+        when(userLoginDetailsRepository.findByEmail(email)).thenReturn(Optional.of(userLoginDetails));
+        adminService.updatePassword(email, newPassword);
+    }
+    @Test
+    void updatePasswordWhenUserDoesNotExist() {
+        String email = "test";
+        String newPassword = "newPassword123";
+
+        when(userLoginDetailsRepository.findByEmail(email)).thenReturn(Optional.empty());
+
+       assertThrows(UsernameNotFoundException.class, () -> {
+            adminService.updatePassword(email, newPassword);
+        });
     }
 
     @Test
@@ -195,4 +215,5 @@ class AdminServiceTest {
                 adminService.updateAdmin("test", adminSUR));
 
     }
+
 }

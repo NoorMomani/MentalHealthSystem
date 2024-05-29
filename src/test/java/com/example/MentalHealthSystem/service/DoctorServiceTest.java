@@ -4,6 +4,7 @@ import com.example.MentalHealthSystem.Database.*;
 import com.example.MentalHealthSystem.constants.DoctorStatus;
 import com.example.MentalHealthSystem.repository.AppointmentRepository;
 import com.example.MentalHealthSystem.repository.DoctorRepository;
+import com.example.MentalHealthSystem.request.DoctorSignUpRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +13,9 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +46,28 @@ class DoctorServiceTest {
     void setUp() {
         MockitoAnnotations.openMocks(this);
     }
+
+    @Test
+    void updateDoctorProfile () throws IOException {
+        String email = "test";
+        Doctor doctor = new Doctor();
+        doctor.setEmail(email);
+
+        DoctorSignUpRequest doctorSUR = new DoctorSignUpRequest();
+        doctorSUR.setName("Dr. Smith");
+        doctorSUR.setLocation("40.7128, -74.0060");
+
+        MultipartFile profilePicture = mock(MultipartFile.class);
+        when(profilePicture.isEmpty()).thenReturn(false);
+        when(profilePicture.getBytes()).thenReturn(new byte[]{1, 2, 3});
+        doctorSUR.setProfilePicture(profilePicture);
+        when(doctorRepository.findById(email)).thenReturn(Optional.of(doctor));
+
+        doctorService.updateDoctorProfile(email, doctorSUR);
+
+        assertNotNull(doctor.getProfilePictureContent());
+    }
+
 
 
     @Test
@@ -117,7 +142,7 @@ class DoctorServiceTest {
     void getAppointmentsByDoctorId() {
         Appointment appointment = new Appointment();
         List<Appointment> appointments = List.of(appointment);
-        when(appointmentRepository.findByDoctorEmailAndBooked("test",true)).thenReturn(appointments);
+        when(appointmentRepository.findByDoctorIdAndBooked("test",true)).thenReturn(appointments);
         assertEquals(appointments,doctorService.getAppointmentsByDoctorId("test",true));
     }
 
